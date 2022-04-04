@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .card {
+        display: flex;
+    }
+
+    .menuId {
+        display: none;
+    }
+
+    .orderId {
+        display: none;
+    }
+
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+
+        /* 숨기기 */
+        z-index: -1;
+        opacity: 0;
+    }
+
+    .backgroundPay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+
+        /* 숨기기 */
+        z-index: -1;
+        opacity: 0;
+    }
+
+    .show {
+        opacity: 1;
+        z-index: 1000;
+        transition: all .5s;
+    }
+
+    .showPay {
+        opacity: 1;
+        z-index: 1000;
+        transition: all .5s;
+    }
+
+    .window {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .windowPay {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .popup {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+
+        /* 임시 지정 */
+        width: 300px;
+        height: 500px;
+
+        /* 초기에 약간 아래에 배치 */
+        transform: translate(-50%, -40%);
+    }
+
+    .popupPay {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+
+        /* 임시 지정 */
+        width: 300px;
+        height: 500px;
+
+        /* 초기에 약간 아래에 배치 */
+        transform: translate(-50%, -40%);
+    }
+
+    .show .popup {
+        transform: translate(-50%, -50%);
+        transition: all .5s;
+    }
+
+    .showPay .popupPay {
+        transform: translate(-50%, -50%);
+        transition: all .5s;
+    }
+</style>
+
+<script type="text/javascript">
+
+
+    window.onload = function () {
+        if (sessionStorage.length === 0) {
+            $('#logoutPage').hide();
+            $('#loginPage').show();
+        } else {
+            $('#logoutPage').show();
+            $('#loginPage').hide();
+        }
+    }
+
+    let bucketList = [];
+
+    function menuList() {
+        if (sessionStorage.length === 0) {
+            alert("로그인 먼저 해주세요")
+        } else {
+            $('#menu-list').empty();
+            $.ajax({
+                    type: "GET",
+                    url: "/api/menu",
+                    data: {},
+                    success: function (response) {
+                        let rows = response;
+
+                        for (let i = 0; i < rows.length; i++) {
+                            let menuId = rows[i]['menuId'];
+                            let menuName = rows[i]['menuName'];
+                            let price = rows[i]['price'];
+                            let imageUrl = rows[i]['imageUrl'];
+                            let menuStatus = rows[i]['menuStatus'];
+                            if (menuStatus === 'ON_SALE') {
+                                menuStatus = '판매중'
+                                let temp_html = ` <span class="card" style="width: 18rem;">
+                                              <img id ="imageSrc" src=${imageUrl} class="card-img-top imageSrc" alt="...">
+
+                                              <div class="card-body">
+
+                                              <h5 id = "${menuName}" class="card-title menuName">${menuName}</h5>
+                                               <p id = "${price}" class="card-text price">${price}</p>
+                                              <p id = "${menuStatus}" class ="menuStatus">${menuStatus}</p>
+                                              <p id = "${menuId}" class="menuId">${menuId}</p>
+                                              <button onclick="addCart()" type="button" class="btn btn-primary"> 장바구니추가 </button>
+                                              </div>
+                                      </span>`
+                                $('#menu-list').append(temp_html);
+                            } else {
+                                menuStatus = '매진'
+                                let temp_html = ` <span class="card" style="width: 18rem;">
+                                              <img id ="imageSrc" src=${imageUrl} class="card-img-top imageSrc" alt="...">
+
+                                              <div class="card-body">
+
+                                              <h5 id = "${menuName}" class="card-title menuName">${menuName}</h5>
+                                               <p id = "${price}" class="card-text price">${price}</p>
+                                              <p id = "${menuStatus}" class ="menuStatus">${menuStatus}</p>
+                                              <p id = "${menuId}" class="menuId">${menuId}</p>
+                                              </div>
+                                      </span>`
+                                $('#menu-list').append(temp_html);
+                            }
+                        }
+
+
+                        $('.btn-primary').click(function (e) {
+                            let addMenuId = parseInt($(e.target).siblings('.menuId').text());
+                            let addName = $(e.target).siblings('.menuName').text()
+                            let addPrice = $(e.target).siblings('.price').text()
+                            let addStatus = $(e.target).siblings('.menuStatus').text()
+                            const item = {
+                                menuId: addMenuId,
+                                userId: sessionStorage.getItem("userId")
+                            }
+                            bucketList.push(item)
+                            localStorage.setItem('itemList', JSON.stringify(bucketList))
+
+                            let temp_html = `<div class="card" style="width: 18rem;">
+                                          <div class="card-body">
+                                          <h5  class="card-title">${addName}</h5>
+                                           <p  class="card-text">${addPrice}</p>
+                                          <p >${addStatus}</p>
+                                           </div>
+                                      </div>`
+                            $('#menuCart').append(temp_html);
+
+                        });
+                    }
+                }
+            )
+        }
+    }
+
+    function addCart() {
+
+        let menuName = $('#menuName').text();
+        let price = $('#price').text();
+        let menuStatus = $('#menuStatus').text();
+
+        let temp_html = `<div class="card" style="width: 18rem;">
+                                          <div class="card-body">
+                                          <h5  class="card-title">${menuName}</h5>
+                                           <p  class="card-text">${price}</p>
+                                          <p >${menuStatus}</p>
+                                           </div>
+                                      </div>`
+        $('#menuCart').append(temp_html);
+    }
+
+
+    function orderStart() {
+
+        const postOrders = JSON.parse(localStorage.getItem('itemList'))
+        for (let i = 0; i < postOrders.length; i++) {
+            $.ajax({
+                type: "POST",
+                url: "/api/order",
+                contentType: "application/json",
+                data: JSON.stringify(postOrders[i])
+            })
+        }
+        alert("주문성공")
+        localStorage.removeItem('itemList')
+        bucketList = [];
+        window.location.href = '/';
+    }
+
+    function login() {
+        window.location.href = '/login.html'
+    }
+
+    function logout() {
+        if (sessionStorage.length === 0) {
+            alert("로그인 상태가 아닙니다.")
+        } else {
+            sessionStorage.clear();
+            alert("로그아웃 되었습니다.")
+        }
+        window.location.href = '/login.html'
+    }
+
+    let userId = encodeURI(sessionStorage.getItem("userId"));
+
+    function orderList() {
+        $("#order").empty();
+        let userdata = {"userId": userId}
+
+        $.ajax({
+            type: "GET",
+            url: `/api/order/${userId}`,
+            data: JSON.stringify(userdata),
+            contentType: "application/json",
+            success: function (response) {
+                let rows = response;
+
+                for (let i = 0; i < rows.length; i++) {
+                    let menuName = rows[i]['menuName'];
+                    let price = rows[i]['price'];
+                    let orderStatus = rows[i]['orderStatus'];
+
+                    if (orderStatus === 'NOTPAID') {
+                        orderStatus = '미결제'
+                    } else {
+                        orderStatus = '결제 완료'
+                    }
+
+                    let temp_html = ` <div class="card" style="width: 18rem;">
+                                              <div class="card-body">
+                                              <h5 id = "${menuName}" class="card-title menuName">${menuName}</h5>
+                                               <p id = "${price}" class="card-text price">${price}</p>
+                                              <p id = "${orderStatus}" class ="menuStatus">${orderStatus}</p>
+                                              </div>
+                                      </div>`
+                    $('#order').append(temp_html);
+                }
+            }
+        })
+    }
+
+    let payList = [];
+
+    function paymentList() {
+        payList = [];
+        $("#payment").empty();
+        let userdata = {"userId": userId}
+
+        $.ajax({
+            type: "GET",
+            url: `/api/order/payment/${userId}`,
+            data: JSON.stringify(userdata),
+            contentType: "application/json",
+            success: function (response) {
+                let rows = response;
+
+                for (let i = 0; i < rows.length; i++) {
+                    let orderId = rows[i]['orderId'];
+                    let menuName = rows[i]['menuName'];
+                    let price = rows[i]['price'];
+                    let orderStatus = rows[i]['orderStatus'];
+                    if (orderStatus === 'NOTPAID') {
+                        orderStatus = '미결제'
+                    }
+                    const item = {
+                        orderId: orderId
+                    }
+                    payList.push(item)
+                    let temp_html = ` <div class="card" style="width: 18rem;">
+                                              <div class="card-body">
+                                              <h5 id = "${menuName}" class="card-title menuName">${menuName}</h5>
+                                               <p id = "${price}" class="card-text price">${price}</p>
+                                               <p id = "${orderId}" class="card-text orderId">${orderId}</p>
+                                              <p id = "${orderStatus}" class ="menuStatus">${orderStatus}</p>
+                                              </div>
+                                      </div>`
+                    $('#payment').append(temp_html);
+                }
+            }
+        })
+    }
+
+    function pay() {
+        if (payList.length === 0) {
+            alert("결제할 상품이 없습니다.")
+        } else {
+
+            for (let i = 0; i < payList.length; i++) {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/paid",
+                    contentType: "application/json",
+                    data: JSON.stringify(payList[i])
+                })
+            }
+            alert("결제완료")
+            payList = [];
+            window.location.reload();
+        }
+    }
+</script>
+
+<body>
+<button id="loginPage" onclick="login()"> 로그인</button>
+<button id="logoutPage" onclick="logout()"> 로그아웃</button>
+<button id="show" onclick="orderList()">주문내역</button>
+<div class="background">
+    <div class="window">
+        <div class="popup">
+            <button id="close">팝업닫기</button>
+            <ul id="order"></ul>
+        </div>
+    </div>
+</div>
+<button id="showPay" onclick="paymentList()">미결제 상품 및 결제하기</button>
+<div class="backgroundPay">
+    <div class="windowPay">
+        <div class="popupPay">
+            <button id="closePay">팝업닫기</button>
+            <button id="paymentButton" onclick="pay()">결제하기</button>
+            <ul id="payment"></ul>
+        </div>
+    </div>
+</div>
+<div class="question-box">
+    <h2>티오더 메뉴</h2>
+    <button onclick="menuList()">메뉴보기</button>
+    <ul id="menu-list">
+    </ul>
+
+
+    <ul id="menuCart">
+    </ul>
+
+    <button onclick="orderStart()" id="orderList">주문하기</button>
+</div>
+
+
+<script>
+    function show() {
+        document.querySelector(".background").className = "background show";
+    }
+
+    function close() {
+        document.querySelector(".background").className = "background";
+    }
+
+    document.querySelector("#show").addEventListener('click', show);
+    document.querySelector("#close").addEventListener('click', close);
+
+    function showPay() {
+        document.querySelector(".backgroundPay").className = "backgroundPay showPay";
+    }
+
+    function closePay() {
+        document.querySelector(".backgroundPay").className = "backgroundPay";
+    }
+
+    document.querySelector("#showPay").addEventListener('click', showPay);
+    document.querySelector("#closePay").addEventListener('click', closePay);
+</script>
+</body>
+
+</html>

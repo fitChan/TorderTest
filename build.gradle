@@ -1,0 +1,55 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'mysql:mysql-connector-java'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.6.3'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.0'
+    // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+    implementation group: 'org.springframework', name: 'spring-jdbc', version: '5.3.16'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.27'
+    implementation 'com.auth0:java-jwt:3.17.0'
+
+
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-java8
+    implementation group: 'org.hibernate', name: 'hibernate-java8', version: '5.4.30.Final'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+
+//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
