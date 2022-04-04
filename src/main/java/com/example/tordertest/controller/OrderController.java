@@ -18,21 +18,23 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    //주문한 내용들을 DB 저장
     @PostMapping("")
     public ResponseEntity<Void> createOrder(@RequestBody OrderRequest orderRequest) {
         orderService.createOrder(orderRequest);
         return ResponseEntity.created(URI.create("/api/order")).build();
     }
 
-    @GetMapping("/{userId}") // 결제 유무에 상관없이 다 보여주는 것.
+
+    // 결제 유무에 상관없이 주문내역을 다 보여주는 것.
+    @GetMapping("/{userId}")
     public ResponseEntity<List<OrderRes>> getOrderList(@PathVariable Long userId){
-        /*
-         * AuthenticationPrincipal 사용 해서 userId Integer 로 받아서 userId대신 리턴 하기.
-         * */
         return ResponseEntity.ok().body(orderService.getOrderList(userId));
     }
 
-    @GetMapping("/payment/{userId}") //유저 추가할것. 결제가 아직 안된 리스트
+
+    // 결제가 안된 주문내역만 보여주는 것.
+    @GetMapping("/payment/{userId}")
     public ResponseEntity<List<OrderRes>> getOrderNotPaidList(@PathVariable Long userId){
         return ResponseEntity.ok().body(orderService.getOrderNotPaidList(userId));
     }

@@ -18,19 +18,20 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserService userService;
 
+    //회원가입
     @PostMapping("/signup")
-    public HttpStatus registerUser(@RequestBody SignupRequestDto signupRequestDto) {
-
+    public ResponseEntity registerUser(@RequestBody SignupRequestDto signupRequestDto, Error error) {
         boolean isExist = userRepository.existsByUsername(signupRequestDto.getUsername());
-
         if(isExist){
-            throw new IllegalArgumentException("아이디가 존재합니다");
+            return ResponseEntity.badRequest().body(error);
         }else {
             userService.registerUser(signupRequestDto);
-            return HttpStatus.OK;
+            return ResponseEntity.ok().build();
         }
     }
 
+
+    //로그인
     @PostMapping("/login")
     public Long login(@RequestBody SignupRequestDto requestDto) {
         User user = userRepository.findByUsername(requestDto.getUsername());

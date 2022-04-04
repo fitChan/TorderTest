@@ -18,6 +18,8 @@ import java.net.URI;
 public class PaymentController {
     private final OrderService orderService;
 
+
+    // 결제 요청이 완료된 후 DB저장
     @PostMapping
     public ResponseEntity<Void> updatePaid(@RequestBody PaymentRes paymentRes){
         orderService.updatePaid(paymentRes);

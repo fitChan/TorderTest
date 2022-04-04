@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TomcatWebServerCustomizer implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
 
+    //Ajax 를 통한  "<>[\\]^`{|}"에 대한 파라미터 전달이 되도록 톰캣 설정
     @Override
     public void customize(TomcatServletWebServerFactory factory) {
         factory.addConnectorCustomizers((TomcatConnectorCustomizer)

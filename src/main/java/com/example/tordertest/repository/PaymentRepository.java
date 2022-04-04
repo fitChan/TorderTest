@@ -11,5 +11,4 @@ import java.util.List;
 @EnableJpaRepositories
 public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 
-//    List<Payment> findByOrderStatus(OrderStatus orderStatus);
 }

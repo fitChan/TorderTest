@@ -46,25 +46,14 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-
-    //요청한 주문 조회
-//    @Transactional
-//    public List<OrderRes> getOrderList(Long userId) {
-//        List<Order> orderList = orderRepository.findByUser(userId);
-//        return OrderRes.list(orderList);
-//    }
     @Transactional
     public List<OrderRes> getOrderList(Long userId) {
         List<Order> orderList = orderRepository.findByUserIdOrderByModifiedAtDesc(userId);
         return OrderRes.list(orderList);
     }
 
-    //결제시 DB에서 삭제 할 것.
     @Transactional
     public List<OrderRes> getOrderNotPaidList(Long userId) {
-        //유저 추가하기..
-//        public List<OrderRes> paid(Long userId) {
-//        List<Order> order = orderRepository.findByUserIdAndStatus(userId, OrderStatus.NOTPAID);
         List<Order> order = orderRepository.findByOrderStatusAndUserIdOrderByModifiedAtDesc(OrderStatus.NOTPAID , userId);
         return OrderRes.list(order);
     }
