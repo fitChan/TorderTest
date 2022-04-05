@@ -1,7 +1,7 @@
 ### 프로잭트 설명
 - 티오더의 (태블릿) 서비스를 구현한 프로잭트입니다.
 
-###기능
+##기능
 - 로그인 로그아웃
 - 메뉴 조회 
 - 장바구니 추가
@@ -16,7 +16,7 @@
 | 회원 | 로그인 | /api/login | POST ||  
 |  | 회원가입| /api/signup| POST|  |
 | 메뉴 | 메뉴 정보| /api/menu|GET   |  |
-|  |메뉴 세부 정도  |/api/order | GET️  |미구현|  
+|  |메뉴 세부 정보  |/api/order | GET️  |미구현|  
 |  장바구니|장바구니 주문 넣기  | /api/order| POST |  
 |  |장바구니 주문 내역 확인  | /api/order/{userId}| GET|
 |결제 관련| 미결제 현황| /api/order/payment/{userId}|GET

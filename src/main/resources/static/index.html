@@ -26,6 +26,9 @@
         display: none;
     }
 
+    .menuIdDelete{
+        display: none;
+    }
     .background {
         position: fixed;
         top: 0;
@@ -180,6 +183,7 @@
                                                <p id = "${price}" class="card-text price">${price}</p>
                                               <p id = "${menuStatus}" class ="menuStatus">${menuStatus}</p>
                                               <p id = "${menuId}" class="menuId">${menuId}</p>
+
                                               </div>
                                       </span>`
                                 $('#menu-list').append(temp_html);
@@ -197,17 +201,18 @@
                                 userId: sessionStorage.getItem("userId")
                             }
                             bucketList.push(item)
-                            localStorage.setItem('itemList', JSON.stringify(bucketList))
+                            // localStorage.setItem('itemList', JSON.stringify(bucketList))
 
-                            let temp_html = `<div class="card" style="width: 18rem;">
+                            let temp_html = `<div  id="${addMenuId}" class="card" style="width: 18rem;">
                                           <div class="card-body">
                                           <h5  class="card-title">${addName}</h5>
                                            <p  class="card-text">${addPrice}</p>
+                                           <p class="menuIdDelete"> ${addMenuId}</p>
                                           <p >${addStatus}</p>
+                                          <button class="deletebtn" onclick="deleteCart(${addMenuId})">삭제하기</button>
                                            </div>
                                       </div>`
                             $('#menuCart').append(temp_html);
-
                         });
                     }
                 }
@@ -215,8 +220,14 @@
         }
     }
 
-    function addCart() {
+    function deleteCart(e) {
+        document.getElementById(eval(e)).remove();
 
+        bucketList = bucketList.filter((item) => item.menuId !== e);
+    }
+
+    function addCart() {
+        let menuId = $('#menuId').text();
         let menuName = $('#menuName').text();
         let price = $('#price').text();
         let menuStatus = $('#menuStatus').text();
@@ -226,6 +237,7 @@
                                           <h5  class="card-title">${menuName}</h5>
                                            <p  class="card-text">${price}</p>
                                           <p >${menuStatus}</p>
+                                          <p id = "${menuId}" class="menuId">${menuId}</p>
                                            </div>
                                       </div>`
         $('#menuCart').append(temp_html);
@@ -233,7 +245,7 @@
 
 
     function orderStart() {
-
+        localStorage.setItem('itemList', JSON.stringify(bucketList))
         const postOrders = JSON.parse(localStorage.getItem('itemList'))
         for (let i = 0; i < postOrders.length; i++) {
             $.ajax({
