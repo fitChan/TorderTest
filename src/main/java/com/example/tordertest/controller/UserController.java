@@ -8,7 +8,11 @@ import com.example.tordertest.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,9 +24,9 @@ public class UserController {
 
     //회원가입
     @PostMapping("/signup")
-    public ResponseEntity registerUser(@RequestBody SignupRequestDto signupRequestDto, Error error) {
+    public ResponseEntity registerUser(@RequestBody @Valid SignupRequestDto signupRequestDto, Errors error) {
         boolean isExist = userRepository.existsByUsername(signupRequestDto.getUsername());
-        if(isExist){
+        if(isExist || error.hasErrors()){
             return ResponseEntity.badRequest().body(error);
         }else {
             userService.registerUser(signupRequestDto);
@@ -33,7 +37,7 @@ public class UserController {
 
     //로그인
     @PostMapping("/login")
-    public Long login(@RequestBody SignupRequestDto requestDto) {
+    public Long login(@RequestBody  @Valid SignupRequestDto requestDto) {
         User user = userRepository.findByUsername(requestDto.getUsername());
         if (!requestDto.getPassword().equals(user.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");

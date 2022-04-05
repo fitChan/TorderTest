@@ -3,6 +3,7 @@ package com.example.tordertest.dto.payment;
 
 import com.example.tordertest.entity.order.OrderStatus;
 import com.example.tordertest.entity.payment.Payment;
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -11,10 +12,9 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class PaymentRes {
-    //    private Long userId;
+    @NotNull
     private Long orderId;
 
-    //    private int totalPrice;
 
     @Builder
     public PaymentRes(Long orderId) {

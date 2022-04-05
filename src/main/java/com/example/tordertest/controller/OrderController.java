@@ -6,8 +6,11 @@ import com.example.tordertest.dto.order.OrderRes;
 import com.example.tordertest.service.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -20,7 +23,10 @@ public class OrderController {
 
     //주문한 내용들을 DB 저장
     @PostMapping("")
-    public ResponseEntity<Void> createOrder(@RequestBody OrderRequest orderRequest) {
+    public ResponseEntity createOrder(@RequestBody @Valid OrderRequest orderRequest, Errors errors) {
+        if(errors.hasErrors()){
+            return ResponseEntity.badRequest().body(errors);
+        }
         orderService.createOrder(orderRequest);
         return ResponseEntity.created(URI.create("/api/order")).build();
     }

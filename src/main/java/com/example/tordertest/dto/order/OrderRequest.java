@@ -1,5 +1,6 @@
 package com.example.tordertest.dto.order;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,16 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderRequest {
-//    private List<OrderRequestList> orderRequestLists;
-
+    @NotNull
     private Long menuId;
+    @NotNull
     private Long userId;
-//    private int quantity;
-
-    /*
-    private OrderStatus orderStatus;
-
-    orderStatus는 결제하기 버튼 눌리면 알아서 Entity에서 Paid로 바뀌게 놔둘꺼야.
-*/
-
 }
