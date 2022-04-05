@@ -30,11 +30,18 @@
 
 
 ## ERD
+
+![TorderE-R-D](https://user-images.githubusercontent.com/84306157/161747024-9edc6473-05ee-4bd7-b5f0-3db4ef285d1b.png)
+
 NOTION 정리
-![TorderE-R-D.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f8ec3fde-e497-433a-9f73-5e73b196314c/TorderE-R-D.png)
 - https://www.notion.so/E-R-D-422cb60498a748f686f0ccca883024d7
 
 
+## 경로 
+
+java -jar TorderTest-0.0.1-SNAPSHOT
+
+- http://localhost:8080
 
 ## 실행 예시
 NOTION 정리
@@ -174,11 +181,6 @@ Sesstion Storage에 해당 유저의 ID(PK)값이 사라졌음을 확인할 수 
 - https://www.notion.so/9d983caceb38476ea7612e63f227cca2
 
 
-## 경로 
-
-java -jar TorderTest-0.0.1-SNAPSHOT
-
-- http://localhost:8080
 
 ## 간단한 코드 정리
 # 회원가입
