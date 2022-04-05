@@ -1,7 +1,7 @@
 ### 프로잭트 설명
 - 티오더의 (태블릿) 서비스를 구현한 프로잭트입니다.
 
-##기능
+## 기능
 - 로그인 로그아웃
 - 메뉴 조회 
 - 장바구니 추가
@@ -10,7 +10,7 @@
 - 결제 명세서 및 결제
 
 
-##API
+## API
 | 기능 | 세부정보 | URL |METHOD|  기타|
 | ------ | -- | -- |----------- |  ----|
 | 회원 | 로그인 | /api/login | POST ||  
@@ -30,13 +30,13 @@
 - Ajax jquery
 
 
-##ERD
+## ERD
 NOTION 정리
 - https://www.notion.so/E-R-D-422cb60498a748f686f0ccca883024d7
 
 
 
-##실행 예시
+## 실행 예시
 NOTION 정리
 - https://www.notion.so/9d983caceb38476ea7612e63f227cca2
 
@@ -47,5 +47,5 @@ java -jar TorderTest-0.0.1-SNAPSHOT
 
 http://localhost:8080
 
-##간단한 코드 정리
+## 간단한 코드 정리
 https://www.notion.so/eeab210c87d2423b8c6d8a1c8d0a5263
