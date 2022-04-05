@@ -39,3 +39,10 @@ NOTION 정리
 ##실행 예시
 NOTION 정리
 - https://www.notion.so/9d983caceb38476ea7612e63f227cca2
+
+
+## 경로 
+
+java -jar TorderTest-0.0.1-SNAPSHOT
+
+http://localhost:8080
