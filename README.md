@@ -58,21 +58,21 @@ NOTION 정리
 
 - 아이디는 2~8자 사이로 입력.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f8591e6e-9e29-481a-a906-b8c972db1fbe/Untitled.png)
+![Untitled (2)](https://user-images.githubusercontent.com/84306157/161745811-127ce828-734a-4d4b-87bb-2d99140df031.png)
 
 - 비밀번호와 비밀번호 확인이 다를 경우 알림
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/58839cf4-4522-45a2-9142-2c2a529356f6/Untitled.png)
+![Untitled (3)](https://user-images.githubusercontent.com/84306157/161745873-38f40eb1-6a32-4bd5-9f07-ecc78eb1d930.png)
 
 - 비밀번호는 영어 또는 숫자로 6~12자 (특수문자 띄어쓰기등 불가능)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b0769dc5-e134-4c33-a8a5-5c20898656ad/Untitled.png)
+![Untitled (4)](https://user-images.githubusercontent.com/84306157/161745929-7f587542-caf6-491c-8d44-7173ce2725f4.png)
 
 - 아이디가 중복 될시에 알림
 
-현재 mysql DB안에 “user” 라는 닉네임이 있을시
+현재 mysql DB안에 “user” 라는 아이디가 있을시
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6be3aff8-c4d1-4021-ac22-b2d5a937864b/Untitled.png)
+![Untitled (5)](https://user-images.githubusercontent.com/84306157/161746016-359cba96-38ee-4ca4-95ea-8c25c968dbb7.png)
 
 ## 1-3 로그인
 
@@ -82,11 +82,11 @@ NOTION 정리
 
 로그인 후 로그아웃 버튼이 생성된 모습
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/02165965-6373-45ba-837a-ea559eaa938a/Untitled.png)
+![Untitled (6)](https://user-images.githubusercontent.com/84306157/161746051-89574c1f-ab92-4042-9172-634109323629.png)
 
 Sesstion Storage에 해당 유저의 ID(PK)값 저장된 모습
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/12f517be-d9af-400f-90a2-18215a8ca505/Untitled.png)
+![Untitled (7)](https://user-images.githubusercontent.com/84306157/161746100-30194150-30ca-46bb-9e07-e79889444abf.png)
 
 ## 1-4 로그아웃
 
@@ -94,7 +94,7 @@ Sesstion Storage에 해당 유저의 ID(PK)값 저장된 모습
 
 Sesstion Storage에 해당 유저의 ID(PK)값이 사라졌음을 확인할 수 있습니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b1286a52-f085-44a9-9566-41dda5a62e88/Untitled.png)
+![Untitled (8)](https://user-images.githubusercontent.com/84306157/161746157-bb8e53d3-a9ef-47a4-8c52-d6e63eb9b20a.png)
 
 # 2. 메뉴 확인 및 주문
 
@@ -102,21 +102,21 @@ Sesstion Storage에 해당 유저의 ID(PK)값이 사라졌음을 확인할 수 
 
 - 메뉴보기 버튼으로 메뉴를 확인할 수 있습니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f613feda-1787-4908-9292-ef3d3f86937f/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/84306157/161746295-b759d39e-f7c3-4288-904c-4f6c5e46cac0.png)
 
 - enum값이 SOLD_OUT인 상품은 장바구니 버튼이 활성화 되어있지 않습니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c8d50abc-2b9c-45bc-a399-06ee0107341f/Untitled.png)
+![Untitled (1)](https://user-images.githubusercontent.com/84306157/161746303-6c2f23ac-aa0f-4cd8-995c-07a2f2c3cc2d.png)
 
 ## 2-2 장바구니 취소
 
 - (편의상 id를 노출하였습니다. ) 2번을 삭제하기 버튼을 누른후 주문을 하면
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7d37a423-e47f-4c2e-9aba-52884ad98b44/Untitled.png)
+![Untitled (2)](https://user-images.githubusercontent.com/84306157/161746310-9a8a74da-22cc-4cc3-9bf4-1ca0325e2685.png)
 
 - DB에는 2개의 메뉴(1번과 3번)만 주문이 됩니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fa11debc-65cf-49d9-8f4c-513e7daeba5b/Untitled.png)
+![Untitled (3)](https://user-images.githubusercontent.com/84306157/161746317-99aa5516-d08c-4437-868b-e6cb521f6088.png)
 
 ## 2-3 주문하기
 
@@ -128,15 +128,15 @@ Sesstion Storage에 해당 유저의 ID(PK)값이 사라졌음을 확인할 수 
 
 주문하기 버튼을 누르면 List에 저장되어있던 메뉴들이 LocalStorage로 저장이 되며 이는 서버로 POST요청을 보내게 됩니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f11d97d4-a35e-433e-ad5f-ea8d764b3fc1/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/84306157/161746438-43638d9d-b93e-4e30-a02a-179f8f53c2f9.png)
 
 - 주문하기 버튼 클릭
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8e46a299-94b5-4880-9da9-2e7324fa3d42/Untitled.png)
+![Untitled (1)](https://user-images.githubusercontent.com/84306157/161746445-12b8a5dc-9201-4068-8bd8-b02d0420e3e6.png)
 
 - Local Storage삭제 및 장바구니 내역 삭제
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0310416f-f817-4184-bd32-aa4fdec26807/Untitled.png)
+![Untitled (2)](https://user-images.githubusercontent.com/84306157/161746449-e78d005c-80a1-4ced-a315-cdf55b47d68c.png)
 
 # 3. 주문 내역 확인 및 결제
 
@@ -144,23 +144,23 @@ Sesstion Storage에 해당 유저의 ID(PK)값이 사라졌음을 확인할 수 
 
 결제 상태인지 아닌지 상관없이 모두 확인이 가능합니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/de541847-286e-49a5-8fe5-2e424f7249e9/Untitled.png)
+![Untitled (3)](https://user-images.githubusercontent.com/84306157/161746454-0058a726-6e4d-4cb0-88a2-1e0d172f346e.png)
 
 - 미결제 상품 및 결제 하기 버튼을 통해 미결제 상품들을 볼 수 있으며 즉시 결제가 가능합니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/74f993dd-678c-41d4-ab0f-4e97425bd937/Untitled.png)
+![Untitled (4)](https://user-images.githubusercontent.com/84306157/161746459-b0186816-05f0-4a19-8191-9edfde97e5db.png)
 
 - 결제 버튼을 누른 후
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/35f7e379-872e-4340-aa5f-c4e3226d2add/Untitled.png)
+![Untitled (5)](https://user-images.githubusercontent.com/84306157/161746465-ee768e61-e76f-493b-ae96-b6384f25326d.png)
 
 - 주문내역의 내용은 결제 완료로 변경 됩니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f4ca82a1-9ced-47a2-a8ce-6dba6d9ed48f/Untitled.png)
+![Untitled (6)](https://user-images.githubusercontent.com/84306157/161746468-63667197-1bfb-4a50-89a8-24cabb87c0fb.png)
 
 - 미결제 상품 및 결제 하기 버튼의 팝업창을 비워지게 되고 DB에 결제 내역이 전송됩니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a3a0c73b-f5bc-4744-aed3-040512a671f9/Untitled.png)
+![Untitled (7)](https://user-images.githubusercontent.com/84306157/161746478-4859b46f-cfd8-474e-a815-82735c540159.png)
 
 # 4. 아쉬운 점
 
