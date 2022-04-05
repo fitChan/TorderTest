@@ -44,7 +44,7 @@ NOTION 정리
 
 ## 1-1 로그인 제한
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7ffd041b-8cac-4f64-97af-5c54fc42a990/Untitled.png)
+![로그인 제한](https://user-images.githubusercontent.com/84306157/161745175-3ec3b8c9-f294-4a1e-a94b-a5f1934ebc79.png)
 
 로그인을 하지 않을시 메뉴를 볼 수 없습니다.
 
@@ -52,7 +52,7 @@ NOTION 정리
 
 로그인 버튼을 누르면 로그인을 할지 회원가입을 할지 선택가능
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d19dbba7-2859-4ec9-8e17-1127efab6894/Untitled.png)
+![Untitled (1)](https://user-images.githubusercontent.com/84306157/161745527-1694cdf3-c536-438b-b63d-54bf2358108b.png)
 
 회원가입시 제한
 
