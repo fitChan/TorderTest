@@ -44,7 +44,7 @@ NOTION 정리
 
 ## 1-1 로그인 제한
 
-https://www.notion.so/9d983caceb38476ea7612e63f227cca2#8ab27a5e62fa4cd4b0b93d92bca84704
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7ffd041b-8cac-4f64-97af-5c54fc42a990/Untitled.png)
 
 로그인을 하지 않을시 메뉴를 볼 수 없습니다.
 
