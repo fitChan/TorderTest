@@ -43,8 +43,7 @@ java -jar TorderTest-0.0.1-SNAPSHOT
 
 - http://localhost:8080
 
-## 실행 예시
-NOTION 정리
+
 # 실행 예제
 
 # 1. 로그인 및 회원가입
