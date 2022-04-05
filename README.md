@@ -46,3 +46,6 @@ NOTION 정리
 java -jar TorderTest-0.0.1-SNAPSHOT
 
 http://localhost:8080
+
+##간단한 코드 정리
+https://www.notion.so/eeab210c87d2423b8c6d8a1c8d0a5263
